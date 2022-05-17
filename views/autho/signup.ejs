@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
+    <link rel="stylesheet" href="/static/css/signup.css">
+</head>
+
+<body>
+    <div class="overlay">
+        <form action="/signup" method="post" class="sign">
+            <h3 style="color:green;text-align: center;">
+                <%=message %>
+            </h3>
+            <header class="head-form">
+                <h2>Signup</h2>
+                <!--     A welcome message or an explanation of the login form -->
+               
+             </header>
+            <div class="signup__field">
+                <i class="signup__icon fas fa-user"></i>
+                <input type="text" class="signup__input" name="username"placeholder="Username " required>
+            </div>
+            <div class="signup__field">
+                <i class="signup__icon fas fa-user"></i>
+                <input type="email" class="signup__input" name="email"placeholder=" Email" required>
+            </div>
+            <div class="signup__field">
+                <i class="signup__icon fas fa-globe"></i>
+                <input type="text" class="signup__input" name="region"placeholder="Region" required>
+            </div>
+            <div class="signup__field">
+                <i class="signup__icon fas fa-lock"></i>
+                <input type="password" class="signup__input"  name="password"placeholder="Password" id="pwd" required>
+                <i class="button__icon fas fa-eye" type="button" id="eye"></i>
+            </div>
+            <button class="button signup__submit">
+                <span class="button__text">Signup Now</span>
+                
+            </button>
+            <div>
+                <p >Already Have An Account?&nbsp; <a href="/login">Login Now!</a></p>
+            </div>				
+        </form>
+    </div>
+    
+    <script src="/static/js/eye.js"></script>
+
+</body>
+
+</html>

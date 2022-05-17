@@ -1,0 +1,147 @@
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #8edb2a;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 500px;
+    border-color: black;
+    display: flex;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: rgb(88, 72, 72);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: rgb(223, 15, 15);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+.float-container {
+    border: 3px solid #fff;
+    padding: 5px;
+}
+
+ #description{
+     height: 100px;
+ }
+
+ #createChannel{
+   border: none;
+   margin-left: 200px;
+   background-color: green;
+   width: 200px;
+   padding: 2%;
+ }
+ .span{
+   /* margin-left: 120px; */
+    overflow: hidden;
+    border: none;
+    color: red;
+    width: 50px;
+    height: 50px;
+    /* margin-top: -25px; */
+    margin: -25px 0px 0px 120px auto;
+ }
+ /* #addMember{
+   background-color: white;
+   border: none;
+   justify-content: flex-end;
+   overflow: hidden;
+   margin-left: 980px;
+ } */
+ /* .memberDiv{
+  width: 20%;
+  height: 200px;
+  padding: 20px;
+  border: 2px solid rgb(27, 26, 26);
+  overflow: hidden;
+  background-color: #fff;
+  margin-left: 800px;
+ } */
+ /* .postDiv{
+  width: 20%;
+  height: 200px;
+  padding: 20px;
+  border: 2px solid rgb(27, 26, 26);
+  overflow: hidden;
+  background-color: #fff;
+ } */
+
+ /* #rightChanel{
+  width: 100%;
+  font-weight:900;
+  height: 50px;
+  float: left;
+  border: 2px solid ;
+  border-bottom-color: #8edb2a;
+  border-top-color: #f9fcf5;
+  border-right-color: #f9fcf5;
+  border-left-color: #f9fcf5;
+  overflow: hidden;
+  box-shadow: 10px 10px 8px #888888;
+  margin-top: -10px;
+ } */
+
+
+
+.modals {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-contents {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.closes {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
