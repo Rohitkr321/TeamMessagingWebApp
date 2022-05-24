@@ -6,19 +6,19 @@ const userModel = require("../database/models/usersdata.js");
 const chanelPostModel = require("../database/models/chanelPost.js");
 
 
-router.get("/login",(req, res)=>{
-        res.redirect("/");
+router.get("/login", (req, res) => {
+    res.redirect("/");
 })
 
-router.get("/verifyornot",(req, res)=>{
-    if(req.session.isLoggedIn){
-    chanelModel.find({username:req.session.username, confirm:false}).then(function(verifyornot){
-        res.json({ notverify: verifyornot })
-    })
-}
-else{
-    res.json({ notverify: [] })
-}
+router.get("/verifyornot", (req, res) => {
+    if (req.session.isLoggedIn) {
+        chanelModel.find({ username: req.session.username, confirm: false }).then(function (verifyornot) {
+            res.json({ notverify: verifyornot })
+        })
+    }
+    else {
+        res.json({ notverify: [] })
+    }
 })
 
 
@@ -47,7 +47,7 @@ router.post("/addChanel", (req, res) => {
             username: req.session.username,
             chanelTag: req.body.tag,
             member: [],
-            chanelId:myTime,
+            chanelId: myTime,
         })
         res.redirect("/")
     }
@@ -59,13 +59,13 @@ router.post("/addChanel", (req, res) => {
 /****************** Find Post ******************************* */
 router.get("/findPost/:id", (req, res) => {
     chanelModel.findOne({ chanelId: req.params.id }).then(function (chanel) {
-        console.log(chanel,"chanel details from chanel.js line 46")
+        console.log(chanel, "chanel details from chanel.js line 46")
         req.session.chanelpost = chanel.chanelName
         req.session.chanelId = chanel.chanelId
         res.sendStatus(200);
     })
 })
-router.get("/addPost",(req, res)=>{
+router.get("/addPost", (req, res) => {
     if (req.session.isLoggedIn) {
         res.render("./autho/dashboard.ejs", { message: "", username: req.session.username })
     }
@@ -84,9 +84,9 @@ router.post("/addPost", (req, res) => {
             postChanelName: req.session.chanelpost,
             createTime: myTime,
         })
-        res.render("./autho/dashboard.ejs",{username:req.session.username,message:""});
+        res.render("./autho/dashboard.ejs", { username: req.session.username, message: "" });
     }
-    else{
+    else {
         res.redirect("/");
     }
 })
@@ -106,7 +106,7 @@ router.get("/totalpost/:id", (req, res) => {
 
 router.get("/delete/:id", (req, res) => {
     if (req.session.isLoggedIn) {
-        chanelModel.deleteMany({chanelId: req.params.id}, (err) => {
+        chanelModel.deleteMany({ chanelId: req.params.id }, (err) => {
             if (err) {
                 console.log(err);
             }
@@ -122,7 +122,7 @@ router.get("/delete/:id", (req, res) => {
 
 router.get("/addmember", (req, res) => {
     if (req.session.isLoggedIn)
-       res.redirect("/");
+        res.redirect("/");
     else
         res.render("./autho/login.ejs", { message: "" });
 })
@@ -135,7 +135,7 @@ router.post("/addmember", (req, res) => {
             break;
         }
         if (flag === false) {
-            chanelModel.find({ chanelId:req.session.chanelUniqueId, member: [req.body.addMember] }).then(function (availableUser) {
+            chanelModel.find({ chanelId: req.session.chanelUniqueId, member: [req.body.addMember] }).then(function (availableUser) {
                 let flags = true;
                 if (availableUser.length > 0) {
                     flags = false;
@@ -149,9 +149,9 @@ router.post("/addmember", (req, res) => {
                                 username: req.body.addMember,
                                 chanelTag: chanel.chanelTag,
                                 member: req.session.username,
-                                chanelId : req.session.chanelUniqueId,
-                                confirm:false,
-                                creator:false,
+                                chanelId: req.session.chanelUniqueId,
+                                confirm: false,
+                                creator: false,
                             })
                             if (err) {
                                 console.log(err)
@@ -175,39 +175,42 @@ router.post("/addmember", (req, res) => {
 })
 
 router.get("/addmember/:id", (req, res) => {
-    console.log(req.params.id,"helo")
+    console.log(req.params.id, "helo")
     req.session.chanelUniqueId = req.params.id;
     res.redirect("/addmember")
 })
 
 
-router.get("/acepetinvite/:id",(req, res)=>{
- if (req.session.isLoggedIn) {
-    chanelModel.updateOne({chanelId:req.params.id,confirm:false},{confirm:true}, function(err){
-            chanelModel.find({ chanelId:req.params.id,username: req.session.username,confirm:true }).then(function (usersverifyChanels) {
+router.get("/acepetinvite/:id", (req, res) => {
+    if (req.session.isLoggedIn) {
+        chanelModel.updateOne({ chanelId: req.params.id, confirm: false }, { confirm: true }, function (err) {
+            chanelModel.find({ chanelId: req.params.id, username: req.session.username, confirm: true }).then(function (usersverifyChanels) {
                 res.json({ chanel: usersverifyChanels })
             })
         })
     }
-    else{
-        res.json({chanel:[]});
+    else {
+        res.json({ chanel: [] });
     }
-    
+
 })
 
-router.get("/deleteinvite/:id",(req, res) =>{
-    if(req.session.isLoggedIn){
-        chanelModel.deleteOne({chanelId:req.params.id,username:req.session.username},(err) =>{
-            chanelModel.findOne({chanelId:req.params.id,creator:true}).then(function (alllist){
-                //console.log(alllist)
+router.get("/deleteinvite/:id", (req, res) => {
+    if (req.session.isLoggedIn) {
+        chanelModel.deleteOne({ chanelId: req.params.id, username: req.session.username }, (err) => {
+            chanelModel.findOne({ chanelId: req.params.id, creator: true }).then(function (alllist) {
+                console.log(alllist.member[0],"hii")
                 /*****************remaining****************** */
-                //chanelModel.deleteOne({})
-               res.json({declineUSer:alllist})
+                // chanelModel.remove({member:alllist.member[0]},(err)=>{
+                //     if(err)
+                //     console.log(err)
+                // })
+                res.json({ declineUSer: alllist }) 
             })
         })
     }
-    else{
-        res.json({declineUSer:[]});
+    else {
+        res.json({ declineUSer: [] });
     }
 })
 
@@ -216,7 +219,7 @@ router.get("/deletepost/:id", (req, res) => {
     console.log(req.params.id)
     chanelPostModel.deleteMany({
         postChanelName
-            : req.params.id,username:req.session.username
+            : req.params.id, username: req.session.username
     }, (err) => {
         if (err) {
             console.log(err);
@@ -230,7 +233,7 @@ router.get("/deletepost/:id", (req, res) => {
 
 let postIdFormessage;
 router.get("/message/:id", (req, res) => {
-    console.log(req.params.id,"hello")
+    console.log(req.params.id, "hello")
     postIdFormessage = req.params.id;
     if (req.session.isLoggedIn) {
         chanelPostModel.findOne({ createTime: req.params.id }).then(function (totalPost) {
@@ -250,9 +253,6 @@ router.get("/message/:id", (req, res) => {
     }
 })
 router.get("/message", (req, res) => {
-    console.log(req.session.postname)
-    console.log(req.session.postTopic)
-    console.log(req.session.totalMember)
     if (req.session.isLoggedIn)
         res.render("./chanel/message.ejs", { message: req.session.postname, topic: req.session.postTopic, totalmembers: req.session.totalMember, username: req.session.username });
     else
@@ -260,14 +260,30 @@ router.get("/message", (req, res) => {
 })
 
 
-router.get("/userdetails",(req, res)=>{
+router.get("/userdetails", (req, res) => {
     let myTime = moment(Date.now()).format("hh:mm:ss a")
-    if(req.session.isLoggedIn)
-    res.json({ userdata: req.session.username,time:myTime, postIdFormessages:postIdFormessage})
+    if (req.session.isLoggedIn)
+        res.json({ userdata: req.session.username, time: myTime, postIdFormessages: postIdFormessage })
     else
-    res.json({ userdata: [] })
+        res.json({ userdata: [] })
 })
-
-
-
+router.get("/search",(req, res)=>{
+    if(req.session.isLoggedIn){
+        res.redirect("/search")
+    }
+})
+router.get("/getallpost",(req, res)=>{
+    chanelPostModel.find({username:req.session.username}).then(function(postdata){
+        res.json({ postdata: postdata })
+    })
+})
+// function searchresult(){
+//     chanelPostModel.find({}).then(function(postdata){
+//                 for(let i = 0;i<postdata.length;i++){
+//                      if(req.body.searchpost === postdata[i].postName){
+//                          console.log(postdata[i].postName)
+//                      }
+//                  }
+//              })
+// }
 module.exports = router

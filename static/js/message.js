@@ -1,8 +1,8 @@
 const socket = io("http://localhost:3000");
 let textarea = document.querySelector('#textarea')
 let messageArea = document.querySelector('.message_area')
-
-
+let onlineUser = document.querySelector(".topheadingonlineUser")
+let mianOnlineUserDiv = document.getElementById("onlineUser")
 
 let data;
 let userInformation;
@@ -20,12 +20,12 @@ request.addEventListener("load", () => {
 socket.on('returnmessage', (msg) => {
     for (let i = 0; i < msg.length; i++) {
         if (JSON.parse(msg[i].postId)[0] === postIdFormessage[0]) {
-            if(userInformation.userdata === msg[i].username)
-            appendMessage(msg[i], 'outgoing')
+            if (userInformation.userdata === msg[i].username)
+                appendMessage(msg[i], 'outgoing')
             else
-            appendMessage(msg[i], 'incoming')
+                appendMessage(msg[i], 'incoming')
         }
-        else{
+        else {
             console.log("glt kiaa tum")
         }
     }
@@ -49,7 +49,7 @@ function sendMessage(message) {
         message: message.trim(),
         time: time,
         postIdFormessages: postIdFormessage,
-        type:'incoming' ,
+        type: 'incoming',
     }
     appendMessage(msg, 'outgoing')
     textarea.value = ""
@@ -58,7 +58,7 @@ function sendMessage(message) {
 }
 function appendMessage(msg, type) {
     let mainDiv = document.createElement('div')
-
+    let innerDiv = document.createElement('div')
     let className = type;
 
     mainDiv.classList.add(className, 'message')
@@ -71,14 +71,35 @@ function appendMessage(msg, type) {
     `
     mainDiv.innerHTML = markup
     messageArea.appendChild(mainDiv);
+
 }
 
 //listen from server.
 socket.on('message', (msg) => {
-    console.log("hello haa bolo")
     appendMessage(msg, 'incoming')
     scrollToBottom()
 })
+// socket.on('user', (username) => {
+//     console.log(username)
+//     let arr = [];
+//     let count = 0;
+//     arr.push(username)
+//     for (let i = 0; i < username.length; i++) {
+//         if (arr[i] === username) {
+//             count++;
+//         }
+//     }
+//     if (count === 0) {
+//         console.log(username,"heloo")
+//         let innerDiv = document.createElement('div')
+//         let html = `
+//             <li style="text-align:center;color:white"> ${username}</li>
+//         `
+//         innerDiv.innerHTML = html;
+//         onlineUser.appendChild(innerDiv)
+//     }
+// })
+
 
 function scrollToBottom() {
     messageArea.scrollTop = messageArea.scrollHeight

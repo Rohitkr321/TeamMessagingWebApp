@@ -4,7 +4,8 @@ let rightChanelPanel = document.getElementById("rightChanel")
 let postButton = document.getElementById("post")
 let postDiv = document.getElementById("postDiv")
 let alertNotification = document.getElementById("alert");
-
+let insideDiv = document.getElementById("inside")
+let searchPost = document.getElementById("postSearch")
 
 let chanelIds;
 
@@ -30,9 +31,9 @@ verifytrueorfalse()
 function shownotverify(notVerifys) {
 	let alertData = `
 		<div id="${notVerifys.chanelId}">
-		<h4 style="color:black">${notVerifys.member} want to add you in new  ${notVerifys.chanelName} chanel.</h4>
-		<p>if you want to add the click on acepet button othetwise click on Decline button</p>
-		<button id="${notVerifys.chanelId}"class="btn btn-success acepet">Acepet</button> <button id="${notVerifys.chanelId}"class="btn btn-danger decline">Decline</button>
+		<h4 style="color:black;text-align:center;">${notVerifys.member} want to add you in a new  chanel ${notVerifys.chanelName} </h4>
+		<p style="color:green;text-align:center;">if you want to add then click on acepet button othetwise click on Decline button</p>
+		<button style="float:left;"id="${notVerifys.chanelId}"class="btn btn-success acepet">Acepet</button> <button style="float:right;"id="${notVerifys.chanelId}"class="btn btn-danger decline">Decline</button>
 		</div>
 	`
 	return alertData
@@ -90,26 +91,27 @@ function addChanelInRightPAnel() {
 	chanelButtonInLeftPanel.forEach(btn => {
 		btn.onclick = function (event) {
 			chanelIds = event.target.id
-			console.log(chanelIds, "hm ynha se hai")
-			deletePosts = event.target.name
-			rightChanelPanel.innerHTML = ""
+			deleteposts = event.target.name
+			// rightChanelPanel.innerHTML = ""
 			let allPost = "";
 			let allChanel = `
 			<h2 style="text-align:center;font-weight:bold;color:blue">
 				${event.target.name}  
 			</h2>
 	`
-			rightChanelPanel.innerHTML = allChanel
+			insideDiv.innerHTML = allChanel
 			let request = new XMLHttpRequest();
 			request.open("get", `/totalpost/${event.target.id}`)
 			request.send();
-			postDiv.innerHTML = ""
+			// postDiv.innerHTML = ""
 			request.addEventListener("load", () => {
 				let postInJson = JSON.parse(request.responseText)
 				let post = postInJson.postData
 				for (let i = 0; i < post.length; i++) {
 					allPost += addPostInRightPanel(post[i]);
 				}
+				console.log(allPost)
+				console.log(document.getElementById("postDiv"))
 				postDiv.innerHTML = allPost;
 				let message = document.querySelectorAll(".message");
 				messagePage();
@@ -309,3 +311,17 @@ window.onclick = function (event) {
 		event.target.style.display = "none";
 	}
 };
+
+searchPost.addEventListener("keyup", (e) => {
+	filterResult(event.target.value);
+})
+
+function filterResult(query) {
+	let request = new XMLHttpRequest();
+	request.open("get", "/getallpost")
+	request.send();
+	request.addEventListener("load", () => {
+		let allpost = JSON.parse(request.responseText);
+	})
+
+}

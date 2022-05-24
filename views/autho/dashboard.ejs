@@ -3,6 +3,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/static/css/channel.css">
 <link rel="stylesheet" href="/static/css/div.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,16 +23,21 @@
 	</div>
 
 	<div class="nav-links">
-		<a style="color:red" href="/logout">Logout</a>
+		<a href="/dashboardpage">Dashboard</a>
 		<a onclick="document.getElementById('id01').style.display='block'" class="notification">
 			<span>Notification</span>
 			<span class="badge">0</span>
 		</a>
+		<a style="color:red" href="/logout">Logout</a>
+
 	</div>
+	<i class='fas fa-user-alt'></i>
+	<i class='fas fa-user-alt' style='font-size:24px'></i>
+	<i class='fas fa-user-alt' style='font-size:36px'></i>
+	<i class='fas fa-user-alt' style='font-size:48px;color:red'></i>
+	<input class="search" placeholder="Search Post..." id="postSearch" />
 </div>
 <div class="w3-container">
-	<!-- <button style="background-color: burlywood;" onclick="document.getElementById('id01').style.display='block'"
-		class="w3-button w3-light">Notification💭🙄</button> -->
 	<div id="id01" class="w3-modal">
 		<div class="w3-modal-content">
 			<header class="w3-container w3-teal">
@@ -85,7 +91,8 @@
 	</div>
 
 	<div class="wrapper">
-		<h5 class="float-child">channel <button class="dot" id="myBtn">+</button></h5>
+		<h5 class="float-child">channel <button class="dot" id="myBtn">➕</button></h5>
+
 		<button type="button" id="addMember" data-toggle="collapse" data-target="#demo">+👤</button>
 		<% if(username){%>
 			<h4 class="dynamicUsername">
@@ -98,51 +105,45 @@
 
 				</div>
 				<!-- <div class="float-parent"> -->
-				
-					<div id="rightChanel" class="two">
 
-						<h5 style="text-align: center;" class="text-danger">
-							<p style="font-size:25px" id="messageshow">
-								<%= message%>
-							</p>
-							<script>
-								let messageShow = document.getElementById("messageshow")
-								setTimeout(function () {
-									messageShow.innerHTML = ""
-								}, 2000)
-							</script>
-						</h5>
-					</div>
-					<div class="postAdd" id="postDiv">
-				
+				<div id="rightChanel" class="two">
+					<h5 style="text-align: center;" class="text-danger">
+						<p style="font-size:25px" id="messageshow">
+							<%= message%>
+						</p>
+						<script>
+							let messageShow = document.getElementById("messageshow")
+							setTimeout(function () {
+								messageShow.innerHTML = ""
+							}, 2000)
+						</script>
+					</h5>
+					<div id="inside">
 					</div>
 
-				
-	</div>
-	<div id="demo" class="collapse right">
-		<div class="memberDiv">
-			<div>
+					<div id="postDiv">
 
-				<form action="/addmember" method="post">
-					<label class="form-label" for="form3Example1c">Add Member</label>
-					<input name="addMember" type="text" class="form-control" required />
-					<button id="member" style="margin-left: 10px;width: 100px;margin-top: 10px;" type="submit"
-						class="btn btn-success">Add</button>
-				</form>
-			</div>
-		</div>
+					</div>
+					
+				</div>
 	</div>
-	<div id="post" class="collapse right">
-		<div class="postDiv">
-			<div>
-				<form action="/addPost" method="post">
-					<label class="form-label" for="form3Example1c">Post Nmae</label>
-					<input name="addPost" type="text" class="form-control" required />
-					<button id="post" style="margin-left: 10px;width: 100px;margin-top: 10px;" type="submit"
-						class="btn btn-success">Add Post</button>
-				</form>
-			</div>
-		</div>
+
+	<div id="demo" class="memberDiv collapse right">
+		<form action="/addmember" method="post">
+			<label class="form-label" for="form3Example1c">Add Member</label>
+			<input name="addMember" type="text" class="form-control" required />
+			<button id="member" style="margin-left: 10px;width: 100px;margin-top: 10px;" type="submit"
+				class="btn btn-success">Add</button>
+		</form>
+	</div>
+
+	<div id="post" class="postDiv collapse right">
+		<form action="/addPost" method="post">
+			<label class="form-label" for="form3Example1c">Post Nmae</label>
+			<input name="addPost" type="text" class="form-control" required />
+			<button id="post" style="margin-left: 10px;width: 100px;margin-top: 10px;" type="submit"
+				class="btn btn-success">Add Post</button>
+		</form>
 	</div>
 </div>
 

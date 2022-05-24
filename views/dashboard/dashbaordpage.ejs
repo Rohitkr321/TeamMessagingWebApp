@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+
+<body>
+<a href="/backtohome"><button id="btn">Back To Home </button></a>
+  <div class="main">
+    <h1>Dashboard </h1>
+    <ul class="cards">
+      <li class="cards_item">
+        <div class="card">
+
+          <div class="card_content">
+            <h2 class="card_title">Popular users</h2>
+            <ul class="list-group list-group-flush">
+              <% for(let i=0;i<payload.users.length;i++){%>
+                <li class="list-group-item">
+                  <%= payload.users[i] %>
+                </li>
+                <hr>
+                <%}%>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li class="cards_item">
+        <div class="card">
+
+          <div class="card_content">
+            <h2 class="card_title">Popular Chanels</h2>
+            <ul class="list-group list-group-flush">
+              <% for(let i=0;i<popularchanel.chanel.length;i++){%>
+              <li class="list-group-item"><%= popularchanel.chanel[i]%></li>
+              <hr>
+              <%}%>
+            </ul>
+
+          </div>
+        </div>
+      </li>
+      <li class="cards_item">
+        <div class="card">
+
+          <div class="card_content">
+            <h2 class="card_title">Popular Region</h2>
+            <ul class="list-group list-group-flush">
+              <% for(let i=0;i<popularRegions.region.length;i++){%>
+              <li class="list-group-item"><%=popularRegions.region[i]%></li>
+              <hr>
+              <%}%>
+            </ul>
+
+          </div>
+        </div>
+      </li>
+      <li class="cards_item">
+        <div class="card">
+
+          <div class="card_content">
+            <h2 class="card_title">Popular Tag</h2>
+            <ul class="list-group list-group-flush">
+              <% for(let i=0;i< popularTag.tag.length;i++){%>
+              <li class="list-group-item"><%= popularTag.tag[i]%></li>
+              <hr>
+              <%}%>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <h3 class="made_by">Thank you💖</h3>
+</body>
+<script src="/static/js/dashboardclient.js"></script>
+
+</html>

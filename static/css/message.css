@@ -94,6 +94,25 @@ textarea{
     margin-top: -500px;
     margin-left: -250px;
 }
+#onlineUser{
+    background-color: #161616;
+    height: 650px;
+    width: 300px;
+}
+#topHeading{
+    color: white;
+    text-align: center;
+}
 #members{
+    color: white;
+    text-align: center;
+}
+.topheadingonlineUser{
+    background-color: rgb(19, 206, 34);
+    margin-top: 200px;
+    height: 369px;
+}
+#allOnlineUser{
+    color: #f0f7ef;
     text-align: center;
 }

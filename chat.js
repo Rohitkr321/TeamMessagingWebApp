@@ -44,6 +44,7 @@ io.on('connection', (socket) => {
             socket.join(id);
             socket.to(id).emit('message', msg)
         })
+        // socket.to(id).emit('user',msg.username)
     })
     socket.on("disconnect", () => {
         console.log("User Disconneceted")

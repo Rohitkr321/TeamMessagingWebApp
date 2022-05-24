@@ -4,13 +4,16 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="/static/css/message.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/css/dashboard.css">
 
-<h4  id="username"> Username :- <%=username %></h4>
 <section class="chat_section">
-    <p  id="members">Available user :- <%=totalmembers %></p>
     <div class="brand">
-        <h4 class="text-danger"><%= message %></h4>
-        <p id="postname"class="text-success"><%= topic%></p>
+        <h3 style="font-weight: bold;"class="text-danger">
+            <%= message %>
+        </h3>
+        <p id="postname" class="text-success">
+            <%= topic%>
+        </p>
     </div>
     <div class="message_area">
 
@@ -19,7 +22,24 @@
         <textarea id="textarea" cols="30" rows="1" placeholder="Write a message "></textarea>
     </div>
 </section>
+<div id="onlineUser">
+    <p style="font-weight: bold;"id="topHeading">Total Members</p>
+    <hr>
+    <% for(let i=0;i<totalmembers.length;i++){%>
 
+        <li id="members">
+            <%= totalmembers[i] %>
+        </li>
+        <%}%>
+            <li id="members">
+                <%=username %>
+            </li>
+            <div class="topheadingonlineUser">
+                <p style="font-weight: bold;"id="allOnlineUser">Online User</p>
+                <hr>
+
+            </div>
+</div>
 
 
 <script src="../../static/js/socket.io.js"></script>
